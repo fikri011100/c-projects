@@ -43,9 +43,9 @@ void initCake()
   Products[3].stock = 7;
   Products[3].price = 17500;
 }
-void showCake()
+void showData()
 {
-  printf("BLUE CAKE SHOP CASHIER\n");
+  printf("BLUE CAKE SHOP\n");
   printf("======================\n\n");
   printf("No. | Cake Code | Cake Name | Available | Price\n");
   printf("--------------------------------------------------------------\n");
@@ -156,7 +156,7 @@ int main()
   do
   {
     Enter(25);
-    showCake();
+    showData();
     Menu();
     switch (inMenu)
     {
