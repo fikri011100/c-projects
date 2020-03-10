@@ -79,7 +79,7 @@ void sell() {
 
 int getCount(struct Node* head) {
 	int count = 0;
-    struct Node* current = head; 
+    current = head; 
 	while(current != NULL){
 		count++;
 		current = current->next;
@@ -96,6 +96,7 @@ int main() {
 	switch(choice) {
 	case 1:
 		if (getCount(head) < 10) {
+			printf("%d", getCount(head));
 			stock();
 		} else {
 			printf("barang maksimal 10");
