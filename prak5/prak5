@@ -1,0 +1,192 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void clrscr() { system("@cls||clear"); }
+
+struct list
+{
+  int price;
+  char name[30];
+  struct list *next;
+  struct list *prev;
+} * head, *tail, *node;
+
+void insert(char name[], int price)
+{
+  struct list *ptr;
+  node = (struct list *)malloc(sizeof(list));
+  node->price = price;
+  strcpy(node->name, name);
+
+  if (head == NULL)
+  {
+    head = node;
+    node->next = head;
+  }
+  else
+  {
+    ptr = head;
+    while (ptr->next != head)
+    {
+      ptr = ptr->next;
+    }
+    ptr->next = node;
+    node->next = head;
+  }
+}
+
+void showList()
+{
+  int numb;
+  numb = 1;
+  struct list *ptr;
+  ptr = head;
+  do
+  {
+    if (node != NULL)
+    {
+      printf("|%-4d|%-30s|Rp%-10d|\n", numb, ptr->name, ptr->price);
+      ptr = ptr->next;
+      numb++;
+    }
+  } while (ptr != head);
+}
+
+void remove(int take)
+{
+  int i, u;
+  u = 1;
+  struct list *ptr;
+  struct list *temp;
+  ptr = head;
+  while (ptr->next != head)
+  {
+    ptr = ptr->next;
+    u++;
+  }
+  if (take == 1)
+  {
+    ptr = head;
+    while (ptr->next != head)
+    {
+      ptr = ptr->next;
+    }
+    temp = ptr->next;
+    ptr->next = head->next;
+    head = head->next;
+    free(temp);
+  }
+  else if (take == u)
+  {
+    ptr = head;
+    while (ptr->next->next != head)
+    {
+      ptr = ptr->next;
+    }
+    temp = ptr->next;
+    ptr->next = temp->next;
+    free(temp);
+  }
+  else
+  {
+    ptr = head;
+    for (i = 1; i < take - 1; i++)
+    {
+      ptr = ptr->next;
+    }
+    temp = ptr->next;
+    ptr->next = temp->next;
+    free(temp);
+  }
+}
+
+int main()
+{
+  int pilih;
+  int toys;
+  toys = 0;
+  int done;
+  done = 0;
+  do
+  {
+    clrscr();
+    printf("BLUE TOYS SHOP\n");
+    printf("............................\n\n");
+    printf("1. View Order List\n");
+    printf("2. Add New Order\n");
+    printf("3. Take Order\n");
+    printf("4. Exit\n\n");
+    do
+    {
+      printf("Input Choice: ");
+      scanf("%d", &pilih);
+    } while (pilih < 1 || pilih > 4);
+    switch (pilih)
+    {
+    case 1:
+    {
+      clrscr();
+      printf("\t\t --- ORDER LIST ---\n\n");
+      printf("+----+------------------------------+------------+\n");
+      printf("|No. | Name of Toys                 | Price      |\n");
+      printf("+----+------------------------------+------------+\n");
+      showList();
+      printf("+----+------------------------------+------------+\n");
+      getch();
+      break;
+    }
+    case 2:
+    {
+      clrscr();
+      char name[30];
+      int price;
+      do
+      {
+        printf("Input Name of Toy: ");
+        fflush(stdin);
+        scanf("%[^\n]", &name);
+      } while (strlen(name) < 3 || strlen(name) > 30);
+      printf("\nInput Price of Toy: ");
+      scanf("%d", &price);
+      printf("\n\n\n--- Add New Order Success---");
+      insert(name, price);
+      toys++;
+      getch();
+      break;
+    }
+    case 3:
+    {
+      int take;
+      clrscr();
+      if (toys == 0)
+      {
+        printf("---There is No Order in The List---");
+      }
+      else
+      {
+        printf("\t\t --- ORDER LIST ---\n\n");
+        printf("+----+------------------------------+----------+\n");
+        printf("|No. | Name of Toys                 | Price    |\n");
+        printf("+----+------------------------------+----------+\n");
+        showList();
+        printf("+----+------------------------------+----------+\n");
+        getch();
+        printf("\n\nInput Number of Order: ");
+        scanf("%d", &take);
+        remove(take);
+        toys--;
+      }
+      break;
+    }
+    case 4:
+    {
+      clrscr();
+      done = 1;
+      printf("\n\n\t\tThankyou for using this program");
+      break;
+    }
+    }
+  } while (done == 0);
+}
