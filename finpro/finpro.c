@@ -76,15 +76,18 @@ void addField()
 	{
 	case 1:
 		strcpy(Y->jenisLapangan, "Lapangan Futsal");
-		Y->durasi = duration * 60000;
+		Y->price = duration * 60000;
+		Y->durasi = duration;
 		break;
 	case 2:
 		strcpy(Y->jenisLapangan, "Lapangan Basket");
-		Y->durasi = duration * 80000;
+		Y->price = duration * 80000;
+		Y->durasi = duration;
 		break;
 	case 3:
 		strcpy(Y->jenisLapangan, "Lapangan Badminton");
-		Y->durasi = duration * 100000;
+		Y->price = duration * 100000;
+		Y->durasi = duration;
 		break;
 	default:
 		break;
@@ -120,7 +123,7 @@ void addField()
 
 		if (maxsize <= 4)
 		{
-			if (Y->namaBooking < temp->jenisLapangan)
+			if (Y->jenisLapangan < temp->jenisLapangan)
 			{
 				temp->left = Y;
 			}
@@ -139,10 +142,12 @@ void addField()
 
 void showPreOrder(struct Node *newnode)
 {
-
+	printf("\n====List Booking Anda=====\n");
+	printf("__________________________________________________________\n");
+	printf("| Jenis Lapangan | Nama Pembooking\t| Tanggal\t | Durasi | Total Harga\t ");
 	if (newnode != NULL)
 	{
-		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
+		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
 		showPreOrder(newnode->left);
 		showPreOrder(newnode->right);
 	}
@@ -154,7 +159,7 @@ void showInOrder(struct Node *newnode)
 	if (newnode != NULL)
 	{
 		showInOrder(newnode->left);
-		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
+		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
 		showInOrder(newnode->right);
 	}
 }
@@ -166,7 +171,7 @@ void showPostOrder(struct Node *newnode)
 	{
 		showPreOrder(newnode->left);
 		showPreOrder(newnode->right);
-		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
+		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
 	}
 }
 
