@@ -28,16 +28,16 @@ void menu()
 
 void showListPrice()
 {
-	printf("\n===========List Harga Booking==========\n");
+	printf("\n===========List Harga Booking============\n");
 	printf("_________________________________________\n");
-	printf("No\t| Jenis Lapangan   \t | Harga Per-Jam\n");
-	printf("-----------------------------------------\n");
-	printf("1.\t| Lapangan futsal   \t| Rp. 60.000 	 \n");
-	printf("2.\t| Lapangan Basket   \t| Rp. 80.000 	 \n");
-	printf("3.\t| Lapangan Badminton\t| Rp. 100.000	 \n\n");
+	printf("No | Jenis Lapangan      | Harga Per-Jam\n");
+	printf("=========================================\n");
+	printf("1. | Lapangan futsal     | Rp. 60.000 	 \n");
+	printf("2. | Lapangan Basket     | Rp. 80.000 	 \n");
+	printf("3. | Lapangan Badminton  | Rp. 100.000	 \n\n");
 }
 
-void AddCar()
+void addField()
 {
 	char tanggal[10];
 	int a, fieldCode, dd, MM, yyyy, duration;
@@ -137,35 +137,35 @@ void AddCar()
 	}
 }
 
-void PreOrder(struct Node *newnode)
+void showPreOrder(struct Node *newnode)
 {
 
 	if (newnode != NULL)
 	{
 		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
-		PreOrder(newnode->left);
-		PreOrder(newnode->right);
+		showPreOrder(newnode->left);
+		showPreOrder(newnode->right);
 	}
 }
 
-void InOrder(struct Node *newnode)
+void showInOrder(struct Node *newnode)
 {
 
 	if (newnode != NULL)
 	{
-		InOrder(newnode->left);
+		showInOrder(newnode->left);
 		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
-		InOrder(newnode->right);
+		showInOrder(newnode->right);
 	}
 }
 
-void PostOrder(struct Node *newnode)
+void showPostOrder(struct Node *newnode)
 {
 
 	if (newnode != NULL)
 	{
-		PreOrder(newnode->left);
-		PreOrder(newnode->right);
+		showPreOrder(newnode->left);
+		showPreOrder(newnode->right);
 		printf("\n%s [ %s ] ", newnode->jenisLapangan, newnode->namaBooking);
 	}
 }
@@ -188,12 +188,12 @@ int main()
 		}
 		else
 		{
-			printf("Preorder  : ");
-			PreOrder(root);
-			printf("\nInorder   : ");
-			InOrder(root);
-			printf("\nPostorder : ");
-			PostOrder(root);
+			printf("showPreOrder  : ");
+			showPreOrder(root);
+			printf("\showInOrder   : ");
+			showInOrder(root);
+			printf("\nshowPostorder : ");
+			showPostOrder(root);
 		};
 		main();
 		break;
@@ -204,7 +204,7 @@ int main()
 		break;
 
 	case 3:
-		AddCar();
+		addField();
 		main();
 		break;
 
