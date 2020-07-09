@@ -2,7 +2,8 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
-#include<conio.h>
+// #include<conio.h>
+#include<curses.h>
 #include<unistd.h>
 #include<time.h>
 #define MAX_NAME 20
