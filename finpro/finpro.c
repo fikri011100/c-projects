@@ -5,8 +5,6 @@
 
 struct Node
 {
-
-	char carcode[4];
 	char jenisLapangan[16];
 	char namaBooking[16];
 	char tanggal[10];
@@ -28,54 +26,69 @@ void menu()
 	printf("4. Exit\n\n");
 }
 
+void showListPrice()
+{
+	printf("\n===========List Harga Booking==========\n");
+	printf("_________________________________________\n");
+	printf("No\t| Jenis Lapangan   \t | Harga Per-Jam\n");
+	printf("-----------------------------------------\n");
+	printf("1.\t| Lapangan futsal   \t| Rp. 60.000 	 \n");
+	printf("2.\t| Lapangan Basket   \t| Rp. 80.000 	 \n");
+	printf("3.\t| Lapangan Badminton\t| Rp. 100.000	 \n\n");
+}
+
 void AddCar()
 {
 	char tanggal[10];
-	int a, fieldCode, dd, MM, yyyy;
+	int a, fieldCode, dd, MM, yyyy, duration;
 	struct Node *Y;
 	struct Node *temp;
 
 	Y = (struct Node *)malloc(sizeof(struct Node));
-
+	showListPrice();
 	printf("Input Field Code : ");
 	scanf("%d", &fieldCode);
 	fflush(stdin);
-	switch (fieldCode)
-	{
-	case 1:
-		strcpy(Y->jenisLapangan, "Lapangan Futsal");
-		break;
-	case 2:
-		strcpy(Y->jenisLapangan, "Lapangan Basket");
-		break;
-	case 3:
-		strcpy(Y->jenisLapangan, "Lapangan Badminton");
-		break;
-	default:
-		break;
-	}
 
 	printf("Input Nama Pembooking : ");
 	scanf("%s", &Y->namaBooking);
 	fflush(stdin);
 
-	// printf("Input Tanggal [dd] : ");
-	// scanf("%s", &dd);
-	// fflush(stdin);
+	printf("Input Tanggal [dd] : ");
+	scanf("%s", &dd);
+	fflush(stdin);
 
-	// printf("Input Bulan [MM] : ");
-	// scanf("%s", &MM);
-	// fflush(stdin);
+	printf("Input Bulan [MM] : ");
+	scanf("%s", &MM);
+	fflush(stdin);
 
-	// printf("Input Tahun [yyyy] : ");
-	// scanf("%s", &yyyy);
-	// fflush(stdin);
-	// strcpy(tanggal, ("$d/$d/$d", &dd, &MM, &yyyy));
-	// strcpy(Y->jenisLapangan, &tanggal);
+	printf("Input Tahun [yyyy] : ");
+	scanf("%s", &yyyy);
+	fflush(stdin);
+	strcpy(tanggal, ("$d/$d/$d", &dd, &MM, &yyyy));
+	strcpy(Y->jenisLapangan, &tanggal);
 
-	// printf("Input Durasi [jam] : ");
-	// scanf("%d", &Y->durasi);
-	// fflush(stdin);
+	printf("Input Durasi [jam] : ");
+	scanf("%d", &duration);
+	fflush(stdin);
+
+	switch (fieldCode)
+	{
+	case 1:
+		strcpy(Y->jenisLapangan, "Lapangan Futsal");
+		Y->durasi = duration * 60000;
+		break;
+	case 2:
+		strcpy(Y->jenisLapangan, "Lapangan Basket");
+		Y->durasi = duration * 80000;
+		break;
+	case 3:
+		strcpy(Y->jenisLapangan, "Lapangan Badminton");
+		Y->durasi = duration * 100000;
+		break;
+	default:
+		break;
+	}
 
 	Y->left = NULL;
 	Y->right = NULL;
@@ -86,7 +99,7 @@ void AddCar()
 		root = Y;
 		root->left = NULL;
 		root->right = NULL;
-		printf("\n\n---Add New Car Success---\n\n");
+		printf("\n\n---Add New Order Success---\n\n");
 	}
 	else
 	{
@@ -115,17 +128,13 @@ void AddCar()
 			{
 				temp->right = Y;
 			}
-			printf("\n\n---Add New Car Success--\n\n");
+			printf("\n\n---Add New Order Success--\n\n");
 		}
 		else
 		{
 			printf("\n\n--Maximum Size of tree is 4 Level!");
 		}
 	}
-}
-
-void Update(struct Node *root)
-{
 }
 
 void PreOrder(struct Node *newnode)
@@ -175,7 +184,7 @@ int main()
 	case 1:
 		if (root == NULL)
 		{
-			printf("\n\t---There is No Book in The Tree---");
+			printf("\n\t---There is No Order in The Tree---");
 		}
 		else
 		{
@@ -190,7 +199,7 @@ int main()
 		break;
 
 	case 2:
-		Update(root);
+		showListPrice();
 		main();
 		break;
 
