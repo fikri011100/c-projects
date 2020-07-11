@@ -5,9 +5,11 @@
 
 struct Node
 {
-	char jenisLapangan[16];
-	char namaBooking[16];
-	char tanggal[10];
+	char jenisLapangan[20];
+	char namaBooking[18];
+	int tanggal;
+	int bulan;
+	int tahun;
 	int durasi;
 	int price;
 	struct Node *left;
@@ -39,8 +41,9 @@ void showListPrice()
 
 void addField()
 {
-	char tanggal[10];
-	int a, fieldCode, dd, MM, yyyy, duration;
+	char tanggal[12];
+	int a, fieldCode, duration;
+	//int dd, MM, yyyy;
 	struct Node *Y;
 	struct Node *temp;
 
@@ -55,18 +58,16 @@ void addField()
 	fflush(stdin);
 
 	printf("Input Tanggal [dd] : ");
-	scanf("%s", &dd);
+	scanf("%d", &Y->tanggal);
 	fflush(stdin);
 
 	printf("Input Bulan [MM] : ");
-	scanf("%s", &MM);
+	scanf("%d", &Y->bulan);
 	fflush(stdin);
 
 	printf("Input Tahun [yyyy] : ");
-	scanf("%s", &yyyy);
+	scanf("%d", &Y->tahun);
 	fflush(stdin);
-	strcpy(tanggal, ("$d/$d/$d", &dd, &MM, &yyyy));
-	strcpy(Y->jenisLapangan, &tanggal);
 
 	printf("Input Durasi [jam] : ");
 	scanf("%d", &duration);
@@ -142,12 +143,9 @@ void addField()
 
 void showPreOrder(struct Node *newnode)
 {
-	printf("\n====List Booking Anda=====\n");
-	printf("__________________________________________________________\n");
-	printf("| Jenis Lapangan | Nama Pembooking\t| Tanggal\t | Durasi | Total Harga\t ");
 	if (newnode != NULL)
 	{
-		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
+		printf("\n| %-18s | %-18s | %d/%d/%d | %d Jam  | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->bulan, newnode->tahun, newnode->durasi, newnode->price);
 		showPreOrder(newnode->left);
 		showPreOrder(newnode->right);
 	}
@@ -159,7 +157,7 @@ void showInOrder(struct Node *newnode)
 	if (newnode != NULL)
 	{
 		showInOrder(newnode->left);
-		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
+		printf("\n| %-18s | %-18s | %d/%d/%d | %d Jam  | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->bulan, newnode->tahun, newnode->durasi, newnode->price);
 		showInOrder(newnode->right);
 	}
 }
@@ -171,7 +169,7 @@ void showPostOrder(struct Node *newnode)
 	{
 		showPreOrder(newnode->left);
 		showPreOrder(newnode->right);
-		printf("\n| %-14s | %-18s | %-12s | %d Jam | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->durasi, newnode->price);
+		printf("\n| %-18s | %-18s | %d/%d/%d | %d Jam  | Rp. %d ", newnode->jenisLapangan, newnode->namaBooking, newnode->tanggal, newnode->bulan, newnode->tahun, newnode->durasi, newnode->price);
 	}
 }
 
@@ -193,11 +191,15 @@ int main()
 		}
 		else
 		{
-			printf("showPreOrder  : ");
+			printf("\n====List Booking Anda=====\n");
+			printf("__________________________________________________________\n");
+			printf("| Jenis Lapangan     | Nama Pembooking\t  | Tanggal\t| Durasi | Total Harga\t \n");
+			printf("______________________________________________________________________________\n");
+			printf("\nPreOrder  : ");
 			showPreOrder(root);
-			printf("\showInOrder   : ");
+			printf("\nInOrder   : ");
 			showInOrder(root);
-			printf("\nshowPostorder : ");
+			printf("\nPostorder : ");
 			showPostOrder(root);
 		};
 		main();
